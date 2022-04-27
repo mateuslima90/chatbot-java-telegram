@@ -19,84 +19,10 @@ public class Main {
         if (greeting(message)) {
             logger.info("Init chat with ".concat(message.from().firstName()));
             sendResponseToUser(bot, chatId, "Olá ".concat(message.from().firstName()));
-            sendResponseToUser(bot, chatId, showAllOptions());
-            sendResponseToUser(bot, chatId, "Um exemplo: somar 10 15");
-        } else if(message.text().toLowerCase().startsWith("somar")) {
-            var operation = message.text().split(" ");
-            logger.info("Operação de Soma");
-            try {
-                var result = Integer.valueOf(operation[1]) + Integer.valueOf(operation[2]);
-                logger.info("Primeiro número " + operation[1]);
-                logger.info("Segundo número " + operation[2]);
-                logger.info("Resultado " + result);
-                sendResponseToUser(bot, chatId, "A soma é ".concat(String.valueOf(result)));
-            } catch (Exception e) {
-                logger.info("Soma exception: " + e);
-                sendResponseToUser(bot, chatId, e.getMessage());
-            }
-        } else if(message.text().toLowerCase().startsWith("subtrair")) {
-            logger.info("Operação de Subtração");
-            var operation = message.text().split(" ");
-            try {
-                var result = Integer.valueOf(operation[1]) - Integer.valueOf(operation[2]);
-                logger.info("Primeiro número " + operation[1]);
-                logger.info("Segundo número " + operation[2]);
-                logger.info("Resultado " + result);
-                sendResponseToUser(bot, chatId, "A subtração é ".concat(String.valueOf(result)));
-            } catch (Exception e) {
-                logger.info("Subtração exception: " + e);
-                sendResponseToUser(bot, chatId, e.getMessage());
-            }
-        } else if(message.text().toLowerCase().startsWith("dividir")) {
-            logger.info("Operação de Dividir");
-            var operation = message.text().split(" ");
-            try {
-                var result = Integer.valueOf(operation[1]) / Integer.valueOf(operation[2]);
-                logger.info("Primeiro número " + operation[1]);
-                logger.info("Segundo número " + operation[2]);
-                logger.info("Resultado " + result);
-                sendResponseToUser(bot, chatId, "A divisão é ".concat(String.valueOf(result)));
-            } catch (Exception e) {
-                logger.info("Divisão exception: " + e);
-                sendResponseToUser(bot, chatId, "Não é possível fazer divisão por 0");
-            }
-        }
-        else if(message.text().toLowerCase().startsWith("multiplicar")) {
-            logger.info("Operação de Multiplicação");
-            var operation = message.text().split(" ");
-            try {
-                var result = Integer.valueOf(operation[1]) * Integer.valueOf(operation[2]);
-                logger.info("Primeiro número " + operation[1]);
-                logger.info("Segundo número " + operation[2]);
-                logger.info("Resultado " + result);
-                sendResponseToUser(bot, chatId, "A multiplicação é ".concat(String.valueOf(result)));
-            } catch (Exception e) {
-                logger.info("Multiplicação exception: " + e);
-                sendResponseToUser(bot, chatId, e.getMessage());
-            }
         } else {
             logger.info("Mensagem enviada " + message.text());
-            sendResponseToUser(bot, chatId, "Não entendi, pode repetir, por favor");
+            sendResponseToUser(bot, chatId, message.text());
         }
-
-    }
-
-    public static boolean validateOptions(Message message) {
-        if(message.text().startsWith("1") || message.text().startsWith("2") ||
-                message.text().startsWith("3") || message.text().startsWith("4")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public static String showAllOptions() {
-        String options = "Eu consigo te ajudar nas operações abaixo" +
-                "\n1 - Somar" +
-                "\n2 - Subtrair" +
-                "\n3 - Dividir" +
-                "\n4 - Multiplicar";
-        return options;
     }
 
     public static boolean greeting(Message message) {
