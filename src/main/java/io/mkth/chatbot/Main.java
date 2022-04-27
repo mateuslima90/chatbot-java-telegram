@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.GetUpdates;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.GetUpdatesResponse;
+import com.pengrad.telegrambot.response.SendResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,18 +36,16 @@ public class Main {
 
     public static void sendResponseToUser(TelegramBot bot, Long chatId, String message) {
         //envio da mensagem de resposta
-        var sendResponse = bot.execute(new SendMessage(chatId, message));
+        SendResponse sendResponse = bot.execute(new SendMessage(chatId, message));
         //verificação de mensagem enviada com sucesso
         System.out.println("Mensagem Enviada?" +sendResponse.isOk());
     }
 
     public static void main(String[] args) {
 
-        for(int i = 0; i < args.length; i++) {
-            System.out.println(args[i]);
-        }
+        String token = "incluir o seu token aqui";
 
-        TelegramBot bot = new TelegramBot(args[0]);
+        TelegramBot bot = new TelegramBot(token);
 
         GetUpdatesResponse updatesResponse;
 
